@@ -38,11 +38,11 @@ public class Flipkart_FitPeo {
 
 		// WebElement first_product = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("_1AtVbE")));
 		WebElement laptop= driver.findElement(By.xpath("//div[text()='CHUWI Intel Celeron Dual Core 11th Gen N4020 - (8 GB/256 GB SSD/Windows 11 Home) HeroBook Plus Laptop']"));
+		//check the details of laptop specifically
 		laptop.click();
-			      //  JavascriptExecutor js = (JavascriptExecutor) driver;
-		          //js.executeScript("window.scrollBy(0, 500)");
+            	//Getting laptop element text	
 		String Text = laptop.getText();
-
+		//Switching windows to go to another window
 		Set<String> windowHandles = driver.getWindowHandles();
 
 		//Iterate through each window handle
@@ -52,33 +52,26 @@ public class Flipkart_FitPeo {
 		}
 		// Add the selected laptop to the shopping cart
 		Thread.sleep(2000);
+		//Pincode adding for addcart enabling
 		WebElement pincode=driver.findElement(By.id("pincodeInputId"));
 		pincode.sendKeys("500081");
-
 		pincode.sendKeys(Keys.ENTER);
 		Thread.sleep(3000);
+		//Clicking on Gotcartbutton to add the laptop into cart
 		WebElement Gotocartbutton = driver.findElement(By.xpath("//button[@class='_2KpZ6l _2U9uOA _3v1-ww']"));
 		Gotocartbutton.click();
-
-		// Navigate to the shopping cart
-		//	        WebElement cart_icon = driver.findElement(By.xpath("//button[@class='_2KpZ6l _2ObVJD _3AWRsL']"));
-		//	        cart_icon.click();
-
-		// Verify that the correct item is in the cart
-		//	        WebElement cart_item = driver.findElement(By.className("_2huFJt"))
-		//	        assert cart_item.getText().contains("laptop");
-
-		// Text to be checked
+		
+		// Text to be checked for the laptop added in the cart and inititial laptop selection comparision
 		String expectedText = "CHUWI Intel Celeron Dual Core 11th Gen N4020 - (8 GB/25";
 
-		// Check if the expected text is present in the page text
+		// Check if the expected laptop is present page or not
 		if (Text.contains(expectedText)) 
 		{
-			System.out.println("Text '" + expectedText + "' is present on the web page.");
+			System.out.println("laptop '" + expectedText + "' is present in the cart.");
 		} 
 		else 
 		{
-			System.out.println("Text '" + expectedText + "' is not present on the web page.");
+			System.out.println("laptop '" + expectedText + "' is not present in the cart.");
 		}
 
 		Thread.sleep(3000);
@@ -87,14 +80,16 @@ public class Flipkart_FitPeo {
 		WebElement placeorder = driver.findElement(By.xpath("//span[text()='Place Order']"));
 		placeorder.click();
 
-		// User Authentication
+		
 		// Assuming there is a login page, replace 'username' and 'password' with valid credentials
 		//In Flipkart Login function works by entering Dynamica OTP received by the mobile number
 
 		driver.navigate().refresh();
 		Thread.sleep(2000);
 		WebElement username = driver.findElement(By.xpath("//input[@type='text']"));
-
+		//Entering mobile Number
+		//NOTE:FLIPKART ALLOWS THIS OTP BASED AUTHENTICATION AND IT DOESNT SEND OTPs if we USE AUTOMATION TOOLS
+		//FROM HERE THE CODE WILL NOT WORK DUE OTP RESTRICTION OF OTPs
 		username.sendKeys("8142190877");
 		WebElement continuebtn = driver.findElement(By.xpath("//span[normalize-space()='CONTINUE']"));
 		continuebtn.click();
@@ -108,14 +103,6 @@ public class Flipkart_FitPeo {
 		String Text2=verify.getText();
 		// Text to be checked
 		String expectedText2 = "Praveen Kumar Bugatha";
-
-		//	        // Check if the expected text is present in the page text
-		//	        if (Text2.contains(expectedText)) {
-		//	            System.out.println("Text '" + expectedText + "' is present on the web page which means Login is succesful.");
-		//	        } else {
-		//	            System.out.println("Text '" + expectedText + "' is not present on the web page.");
-		//	        }
-
 		//verifying login success or not
 		assertEquals(Text2, expectedText2);
 
